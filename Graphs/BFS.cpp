@@ -2,13 +2,11 @@
 using namespace std;
 
 class Solution {
-    public:
-    vector<int> BFSTraversal(int V, vector<int> adj[]) {
-        int vis[V] = {0};
-        vis[0] = 1;
+    private:
+    void bfs(int node, int V, vector<int> adj[], vector<int> &vis, vector<int> bfs) {
+        vis[node] = 1;
         queue<int> q;
-        q.push(0);
-        vector<int> bfs;
+        q.push(1);
         while(!q.empty()) {
             int node = q.front();
             q.pop();
@@ -21,14 +19,29 @@ class Solution {
                 }
             }
         }
-        return bfs;
+    }
+    public:
+    vector<int> BFSTraversal(int V, vector<int> adj[]) {
+        vector<int> bfs;
+        vector<int> vis(V, 0);
+
+        for(int i=0; i<V; i++) {
+            if(!vis[i]) {
+                bfs(i, V, adj, vis, bfs);
+            }
+        }
     }
 };
 
 int main() {
     int V = 9;
     vector<int> result;
-    vector<int> adj[V+1];
+    vector<int> adj[] = {{}, {2, 6}, {1, 3, 4}, {2}, {2, 5}, {4, 7}, {1, 7, 8}, {5, 6}, {6}};
     Solution S;
-    result = S.BFSTraversal(6, adj);
+    result = S.BFSTraversal(V, adj);
+    for(auto i : result) {
+        cout << i << " ";
+    }
+    cout << endl;
+    return 0;
 }
