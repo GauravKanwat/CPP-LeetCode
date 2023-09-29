@@ -1,21 +1,16 @@
 #include <iostream>
 using namespace std;
 
-vector<int> printNos(int x) {
+void printNos(int x) {
     // Write Your Code Here
-    if(x == 0) return vector<int> ();
-    vector<int> numbers = printNos(x-1);
-    numbers.push_back(x);
-    return numbers;
+    if(x == 0) return;
+    printNos(x-1);
+    cout << x << " ";
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> print = printNos(n);
-    for(int num : print) {
-        cout << num << " ";
-    }
+    int n = 5;
+    printNos(n);
     cout << endl;
     return 0;
 }
