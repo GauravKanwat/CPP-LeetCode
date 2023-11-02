@@ -1,19 +1,24 @@
 #include<iostream>
 using namespace std;
-
-int traffic(int n, int m, vector<int> vehicle) {
+int traffic(int n, int m, vector<int> &vehicle) {
 	// Write your code here.
+    int sum = 0;
+    if(m == 0) {
+        for(int i=0; i<n; i++) {
+            sum += vehicle[i];
+        }
+        return sum;
+    }
+    int maxSum = 0;
     for(int i=0; i<n; i++) {
-        if(vehicle[i] == 0 && m) {
+        if(vehicle[i] == 0) {
             vehicle[i] = 1;
-            m--;
+            int currSum = traffic(n, m-1, vehicle);
+            maxSum = max(maxSum, currSum);
+            vehicle[i] = 0;
         }
     }
-    int count = 0;
-    for(int i=0; i<n; i++) {
-        if(vehicle[i] == 1) count++;
-    }
-    return count;
+    return maxSum;
 }
 
 

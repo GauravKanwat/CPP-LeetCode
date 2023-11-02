@@ -1,35 +1,37 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector<int> getFrequencies(vector<int> &v) {
-    unordered_map<int, int> mpp;
-    for(auto i : v) {
-        mpp[i]++;
+vector<int> getFrequencies(vector<int>& v) {
+    int n = v.size();
+    map<int, int> hashh;
+
+    for(int i=0; i<n; i++) {
+        hashh[v[i]]++;
     }
-    int max = INT_MIN, min = INT_MAX;
-    vector<int> ans(2);
-    for(auto i : mpp) {
-        if(i.second > max) {
-            ans[0] = i.first;
-            max = i.second;
+    vector<int> freq(2);
+
+    int maxFreq = 0, minFreq = n;
+
+    for(auto i : hashh) {
+        int element = i.first;
+        int count = i.second;
+
+        if(count > maxFreq) {
+            freq[0] = element;
+            maxFreq = count;
         }
-        if(i.second < min) {
-            ans[1] = i.first;
-            min = i.second;
+        if(count < minFreq) {
+            freq[1] = element;
+            minFreq = count;
         }
     }
-    return ans;
+    return freq;
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> inp(n);
-    for(int i=0; i<n; i++) {
-        cin >> inp[i];
-    }
-    vector<int> result;
-    result = getFrequencies(inp);
+    vector<int> v = {1, 2, 3, 1, 1, 4};
+    vector<int> result(2);
+    result = getFrequencies(v);
     for(int i : result) cout << i << " ";
     cout << endl;
     return 0;
