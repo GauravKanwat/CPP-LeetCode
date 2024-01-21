@@ -27,7 +27,7 @@ class Graph {
 
 int main() {
     int V = 5;
-    vector<int> adj[] = {{1}, {0,2,4}, {1,3}, {2,4}, {1,3}};
+    vector<int> adj[] = {{0, 1}, {1, 2}, {3, 4}};
     Graph G;
     bool cycle = G.isCycle(V, adj);
     cout << cycle << endl;
